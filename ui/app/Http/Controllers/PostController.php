@@ -37,11 +37,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title'=>'required',
-            'des'=>'required'
-        ]);
+        // $request->validate([
+        //     'title'=>'required',
+        //     'des'=>'required'
+        // ]);
 
+        $rules =[
+            'title'=>'required',
+         'des'=>'required'
+        ];
+        $msg =[
+            'title.required'=>"You can't leave title",
+            'des.required'=>"You can't leave description"
+        ];
+        $this->validate($request, $rules, $msg);
         $data = new Post;
         $data->title = $request->title;
         $data->description = $request->des;

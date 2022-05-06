@@ -21,5 +21,5 @@ Route::get('/', function () {
 Route::get('/test',function(){
 return "Testing";
 });
-Route::resource('posts', PostController::class);
+        Route::resource('posts', PostController::class);
 
