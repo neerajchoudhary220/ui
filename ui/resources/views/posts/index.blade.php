@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
-    <meta charset="UTF-8">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
 </head>
 <body>
+
     <div class="container mt-2">
         {{-- create msg --}}
         @if($message = Session::get('create'))
@@ -35,10 +36,28 @@
                 <th>Description</th>
                 <th>Action</th>
             </tr>
+            @php
+            if(isset($_GET['page']))
+            {
+                // if($_GET['page']==1){
+                //     $count=1;
+                // }else{
+                    $count=$_GET['page']+($_GET['page']-1);
+                // }
+
+            }
+
+
+            else{
+                $count =1;
+            }
+            @endphp
+
             @foreach ($posts as $data )
+
             <tr>
 
-                <td>{{$data->id}}</td>
+                <td>{{$count}}</td>
                 <td>{{$data->title}}</td>
                 <td>{{$data->description}}</td>
                 <td>
@@ -54,9 +73,11 @@
 
 
             </tr>
+            @php $count=$count+1 @endphp
             @endforeach
         </table>
         {{-- {{!! $posts->links() !!}} --}}
+        {!! $posts->links() !!}
     </div>
 </body>
 </html>

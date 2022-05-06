@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data['posts'] = Post::orderBy('id','desc')->paginate(5);
+        $data['posts'] = Post::orderBy('id','desc')->paginate(2);
         return view('posts.index',$data);
     }
 
@@ -87,10 +87,12 @@ class PostController extends Controller
             'title'=>'required',
             'des'=>'required'
         ]);
+
         $data = Post::find($id);
         $data->title = $request->title;
         $data->description = $request->des;
         $data->save();
+
         return redirect()->route('posts.index')
         ->with('update','Data has been updated');
     }
